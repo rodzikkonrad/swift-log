@@ -1084,8 +1084,13 @@ let systemStdout = Darwin.stdout
 let systemStderr = CRT.stderr
 let systemStdout = CRT.stdout
 #elseif canImport(Glibc)
+#if os(Android)
+let systemStderr = Glibc.stderr
+let systemStdout = Glibc.stdout
+#else
 let systemStderr = Glibc.stderr!
 let systemStdout = Glibc.stdout!
+#endif
 #elseif canImport(Musl)
 let systemStderr = Musl.stderr!
 let systemStdout = Musl.stdout!
